@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import config from '@/config.js'
 
 export default {
     name: 'Question',
@@ -66,7 +67,7 @@ export default {
         getQuestions: function() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/questions`
+                url: `${config.port}/questions`
             })
                 .then((questions) => {
                     this.questions = questions.data
@@ -78,7 +79,7 @@ export default {
         createQuestion: function() {
             axios({
                 method: 'POST',
-                url: `http://localhost:3000/questions/create`,
+                url: `${config.port}/questions/create`,
                 data: {
                     title: this.createdQuestion.title,
                     description: this.createdQuestion.description

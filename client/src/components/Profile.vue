@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import config from '@/config.js'
 
 export default {
     name: 'Profile',
@@ -64,7 +65,7 @@ export default {
         getUserProfile: function() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/users/profile`,
+                url: `${config.port}/users/profile`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }
@@ -82,7 +83,7 @@ export default {
         getUserQuestion: function() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/questions/ownsquestion/user`,
+                url: `${config.port}/questions/ownsquestion/user`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }

@@ -23,6 +23,7 @@
 
 <script>
 import Header from '@/components/Header.vue'
+import config from '@/config.js'
 
 export default {
   name: 'Login',
@@ -42,7 +43,7 @@ export default {
     login: function() {
         axios({
             method: 'POST',
-            url: `http://localhost:3000/login`,
+            url: `${config.port}/login`,
             data: {
                 email: this.loginUser.email,
                 password: this.loginUser.password

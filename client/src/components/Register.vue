@@ -32,6 +32,7 @@
 
 <script>
 import Header from '@/components/Header.vue'
+import config from '@/config.js'
 
 export default {
 	name: 'Register',
@@ -52,7 +53,7 @@ export default {
 		register: function() {
 			axios({
 				method: 'POST',
-				url: `http://localhost:3000/register`,
+				url: `${config.port}/register`,
 				data: {
 					username: this.registerUser.username,
 					email: this.registerUser.email,
@@ -73,7 +74,7 @@ export default {
 			var id_token = googleUser.getAuthResponse().id_token;
 			axios({
 				method: 'POST',
-				url: `http://localhost:3000/googlelogin`,
+				url: `${config.port}/googlelogin`,
 				data: {
 					googleToken: id_token
 				}

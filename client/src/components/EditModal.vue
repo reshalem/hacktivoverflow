@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import config from '@/config.js'
 
 export default {
   name: 'EditModal',
@@ -44,7 +45,7 @@ export default {
     getCurrentQuestion: function() {
       axios({
         method: 'GET',
-        url: `http://localhost:3000/questions/${this.questionId}`
+        url: `${config.port}/questions/${this.questionId}`
       })
         .then((question) => {
             this.currentQuestion.title = question.data.title
@@ -57,7 +58,7 @@ export default {
     editQuestion: function() {
       axios({
         method: 'PUT',
-        url: `http://localhost:3000/questions/${this.questionId}`,
+        url: `${config.port}/questions/${this.questionId}`,
         data: {
           title: this.currentQuestion.title,
           description: this.currentQuestion.description

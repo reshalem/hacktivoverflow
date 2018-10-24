@@ -100,6 +100,7 @@
 
 <script>
 import EditModal from '@/components/EditModal.vue'
+import config from '@/config.js'
 
 export default {
     name: 'OneQuestion',
@@ -129,7 +130,7 @@ export default {
         getOneQuestion: function() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/questions/${this.id}`
+                url: `${config.port}/questions/${this.id}`
             })
                 .then((question) => {
                     this.question = question.data
@@ -143,7 +144,7 @@ export default {
         getAnswers: function() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/answers/${this.id}`,
+                url: `${config.port}/answers/${this.id}`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }
@@ -164,7 +165,7 @@ export default {
         updateAnswer: function() {
             axios({
                 method: 'PUT',
-                url: `http://localhost:3000/answers/${this.id}`,
+                url: `${config.port}/answers/${this.id}`,
                 data: {
                     content: this.editAnswer.content,
                     id: this.editAnswer.id
@@ -183,7 +184,7 @@ export default {
         addAnswer: function() {
             axios({
                 method: 'POST',
-                url: `http://localhost:3000/answers/${this.id}`,
+                url: `${config.port}/answers/${this.id}`,
                 data: {
                     content: this.answerContent
                 },
@@ -202,7 +203,7 @@ export default {
         deleteAnswer: function(answerId) {
             axios({
                 method: 'DELETE',
-                url: `http://localhost:3000/answers/${this.id}`,
+                url: `${config.port}/answers/${this.id}`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 },
@@ -230,7 +231,7 @@ export default {
         deleteQuestion: function(questionId) {
             axios({
                 method: 'DELETE',
-                url: `http://localhost:3000/questions/${questionId}`,
+                url: `${config.port}/questions/${questionId}`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }
@@ -246,7 +247,7 @@ export default {
         upvoteQuestion: function() {
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/questions/upvote/${this.id}`,
+                url: `${config.port}/questions/upvote/${this.id}`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }
@@ -263,7 +264,7 @@ export default {
         upvoteAnswer: function(answerId) {
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/answers/upvote`,
+                url: `${config.port}/answers/upvote`,
                 data: {
                     id: answerId
                 },
@@ -281,7 +282,7 @@ export default {
         downvoteQuestion: function(answerId) {
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/questions/downvote/${this.id}`,
+                url: `${config.port}/questions/downvote/${this.id}`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }
@@ -298,7 +299,7 @@ export default {
         downvoteAnswer: function(answerId) {
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/answers/downvote`,
+                url: `${config.port}/answers/downvote`,
                 data: {
                     id: answerId
                 },
@@ -325,7 +326,7 @@ export default {
 
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/questions/${this.questionId}`
+                url: `${config.port}/questions/${this.questionId}`
             })
                 .then((question) => {
                     this.question = question.data

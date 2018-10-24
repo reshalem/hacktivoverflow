@@ -24,6 +24,7 @@
 
 <script>
 import EditModal from '@/components/EditModal.vue'
+import config from '@/config.js'
 
 export default {
     name: 'AllQuestions',
@@ -44,7 +45,7 @@ export default {
         getQuestions: function() {
             axios({
                 method: 'GET',
-                url: `http://localhost:3000/questions`
+                url: `${config.port}/questions`
             })
                 .then((questions) => {
                     this.questions = questions.data
@@ -59,7 +60,7 @@ export default {
         deleteQuestion: function(questionId) {
             axios({
                 method: 'DELETE',
-                url: `http://localhost:3000/questions/${questionId}`,
+                url: `${config.port}/questions/${questionId}`,
                 headers: {
                     'access-token': localStorage.getItem('token')
                 }
