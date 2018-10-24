@@ -16,8 +16,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required'],
-        minlength: [4, 'Min characters length is 4'],
-        maxlength: [10, 'Max characters length is 10']
+        minlength: [4, 'Min characters length is 4']
     },
     viaThirdParty: {
         type: String

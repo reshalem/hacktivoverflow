@@ -7,5 +7,6 @@ indexRouter.get('/', function(req, res) {
 
 indexRouter.post('/register', UserController.register);
 indexRouter.post('/login', UserController.login);
+indexRouter.post('/googlelogin', UserController.googleLogin);
 
 module.exports = indexRouter;
