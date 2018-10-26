@@ -11,12 +11,12 @@ const questionRouter = require('./routes/questionRouter.js');
 const answerRouter = require('./routes/answerRouter.js');
 const cron = require('./helpers/cron');
 
-// mongoose.connect('mongodb://localhost/hacktivoverflow', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/hacktivoverflow', {useNewUrlParser: true});
 
-var mongodbUri = `mongodb://${process.env.MLAB_USER}:${process.env.MLAB_PASSWORD}@ds147274.mlab.com:47274/hacktivxoverflow`;
-mongoose.connect(mongodbUri, {
-    useNewUrlParser: true
-});
+// var mongodbUri = `mongodb://${process.env.MLAB_USER}:${process.env.MLAB_PASSWORD}@ds147274.mlab.com:47274/hacktivxoverflow`;
+// mongoose.connect(mongodbUri, {
+//     useNewUrlParser: true
+// });
 
 app.use(cors());
 app.use(express.urlencoded({extended: true}));

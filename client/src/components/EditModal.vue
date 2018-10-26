@@ -79,6 +79,21 @@ export default {
   created() {
     this.getCurrentQuestion()
     this.getonequestion()
+  },
+  watch: {
+    questionId() {
+      axios({
+          method: 'GET',
+          url: `${config.port}/questions/${this.questionId}`
+      })
+          .then((question) => {
+              this.currentQuestion.title = question.data.title
+              this.currentQuestion.description = question.data.description
+          })
+          .catch((err) => {
+              console.log(err)
+          })
+    }
   }
 }
 </script>

@@ -109,19 +109,45 @@ class QuestionController {
     static upvote(req, res) {
         Question.findById(req.params.id)
             .then(function(question) {
-                if (question.poster != req.user._id) {
+              const posterId = new mongoose.Types.ObjectId(req.user._id);
+                if (question.poster.equals(posterId) === false) {
+                    let alreadyDownvote = question.downvotes.indexOf(req.user._id) !== -1;
                     if (question.upvotes.indexOf(req.user._id) === -1) {
-                        question.update({
-                            $push: {
-                                upvotes: req.user._id
-                            }
-                        })
-                            .then(function(result) {
-                                res.status(200).json(result);
+                        if (alreadyDownvote) {
+                            question.update({
+                                $pull: {
+                                    downvotes: req.user._id
+                                }
                             })
-                            .catch(function(err) {
-                                res.status(500).json(err);
-                            });
+                                .then(function(result) {
+                                    question.update({
+                                        $push: {
+                                            upvotes: req.user._id
+                                        }
+                                    })
+                                        .then(function(result) {
+                                            res.status(200).json(result);
+                                        })
+                                        .catch(function(err) {
+                                            res.status(500).json(err);
+                                        });
+                                })
+                                .catch(function(err) {
+                                    res.status(500).json(err);
+                                });
+                        } else  {
+                            question.update({
+                                $push: {
+                                    upvotes: req.user._id
+                                }
+                            })
+                                .then(function(result) {
+                                    res.status(200).json(result);
+                                })
+                                .catch(function(err) {
+                                    res.status(500).json(err);
+                                });
+                        }
                     } else {
                         question.update({
                             $pull: {
@@ -149,19 +175,45 @@ class QuestionController {
     static downvote(req, res) {
         Question.findById(req.params.id)
             .then(function(question) {
-                if (question.poster != req.user._id) {
+              const posterId = new mongoose.Types.ObjectId(req.user._id);
+                if (question.poster.equals(posterId) === false) {
+                    let alreadyUpvote = question.upvotes.indexOf(req.user._id) !== -1;
                     if (question.downvotes.indexOf(req.user._id) === -1) {
-                        question.update({
-                            $push: {
-                                downvotes: req.user._id
-                            }
-                        })
-                            .then(function(result) {
-                                res.status(200).json(result);
+                        if (alreadyUpvote) {
+                            question.update({
+                                $pull: {
+                                    upvotes: req.user._id
+                                }
                             })
-                            .catch(function(err) {
-                                res.status(500).json(err);
-                            });
+                                .then(function(result) {
+                                    question.update({
+                                        $push: {
+                                            downvotes: req.user._id
+                                        }
+                                    })
+                                        .then(function(result) {
+                                            res.status(200).json(result);
+                                        })
+                                        .catch(function(err) {
+                                            res.status(500).json(err);
+                                        });
+                                })
+                                .catch(function(err) {
+                                    res.status(500).json(err);
+                                });
+                        } else {
+                            question.update({
+                                $push: {
+                                    downvotes: req.user._id
+                                }
+                            })
+                                .then(function(result) {
+                                    res.status(200).json(result);
+                                })
+                                .catch(function(err) {
+                                    res.status(500).json(err);
+                                });
+                        }
                     } else {
                         question.update({
                             $pull: {

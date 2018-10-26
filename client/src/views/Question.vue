@@ -103,7 +103,7 @@ export default {
     },
     watch: {
         questions() {
-            
+            this.getQuestions()
         }
     }
 }

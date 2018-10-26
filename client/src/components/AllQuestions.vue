@@ -7,7 +7,6 @@
                     <i class="fas fa-fingerprint text-danger mr-2" id="btn-fingerprint"></i>
                     Your Question
                 </div>
-                <EditModal :questionId="question._id" :getquestions="getQuestions"></EditModal>
                 <h4 class="card-title text-left mb-5">{{ question.title }}</h4>
                 <p class="card-text text-left mb-5">{{ question.description }}</p>
                 <div class="d-flex justify-content-between align-items-center mb-4">
@@ -23,15 +22,11 @@
 </template>
 
 <script>
-import EditModal from '@/components/EditModal.vue'
 import config from '@/config.js'
 
 export default {
     name: 'AllQuestions',
     props: ['shouldUpdate', 'isLogin', 'userEmail', 'getquestions'],
-    components: {
-        EditModal
-    },
     data() {
         return {
             questions: [],
@@ -80,6 +75,9 @@ export default {
     watch: {
         shouldUpdate() {
             this.getQuestions()
+        },
+        isLogin() {
+          this.checktoken()
         }
     }
 }

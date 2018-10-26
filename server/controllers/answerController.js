@@ -1,4 +1,5 @@
 const Answer = require('../models/answerModel.js');
+const mongoose = require('mongoose');
 
 class AnswerController {
     static add(req, res) {
@@ -49,7 +50,8 @@ class AnswerController {
     static upvote(req, res) {
         Answer.findById(req.body.id)
             .then(function(answer) {
-                if (answer.user != req.user._id) {
+              const userId = new mongoose.Types.ObjectId(req.user._id);
+                if (answer.user.equals(userId) === false) {
                     if (answer.upvotes.indexOf(req.user._id) === -1) {
                         answer.update({
                             $push: {
@@ -89,7 +91,8 @@ class AnswerController {
     static downvote(req, res) {
         Answer.findById(req.body.id)
             .then(function(answer) {
-                if (answer.user != req.user._id) {
+              const userId = new mongoose.Types.ObjectId(req.user._id);
+                if (answer.user.equals(userId) === false) {
                     if (answer.downvotes.indexOf(req.user._id) === -1) {
                         answer.update({
                             $push: {

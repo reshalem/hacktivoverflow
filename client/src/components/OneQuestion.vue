@@ -62,7 +62,7 @@
                         <div class="d-flex flex-column justify-content-end ml-auto">
                             <div class="mb-2">{{answer.content}}</div>
                             <div class="d-flex">
-                                <i class="fas fa-edit text-dark mr-3" data-toggle="modal" data-target="#editModalAnswer" @click="editAnswers(answer._id, answer.content)" id="btn-edit-delete"></i>
+                                <i class="fas fa-edit text-dark mr-3" data-toggle="modal" data-target="#editModalAnswer" v-if="userEmail === answer.user.email" @click="editAnswers(answer._id, answer.content)" id="btn-edit-delete"></i>
                                 <i class="far fa-trash-alt text-warning text-right" id="btn-edit-delete" v-if="userEmail === answer.user.email" @click="deleteAnswer(answer._id)"></i>
                             </div>
                         </div>
@@ -81,7 +81,6 @@
                                 <div class="form-group d-flex flex-column">
                                     <label for="description" class="text-left">Content</label>
                                     <textarea class="form-control" id="message" rows="3" placeholder="Task Brief Explanation" v-model="editAnswer.content">{{editAnswer.content}}</textarea>
-                                    {{editAnswer.id}}
                                 </div>
                             </form>
                             </div>

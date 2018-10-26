@@ -79,7 +79,7 @@ class UserController {
                                 if (user) {
                                     console.log(user);
                                     const token = jwt.sign({id: user._id, username: user.username, email: user.email}, process.env.JWT_KEY);
-                                    res.status(200).json({token: token, email: user.email});
+                                    res.status(201).json({token: token, email: user.email});
                                 } else {
                                     console.log('no user with such an email')
                                     let user = new User({
@@ -91,7 +91,7 @@ class UserController {
                                     user.save()
                                         .then(function(user) {
                                             const token = jwt.sign({id: user._id, username: user.username, email: user.email}, process.env.JWT_KEY);
-                                            res.status(200).json({token: token, email: user.email});
+                                            res.status(201).json({token: token, email: user.email});
                                         })
                                         .catch(function(err) {
                                             // console.log('err 1', err.message)
